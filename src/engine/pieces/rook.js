@@ -10,24 +10,25 @@ export default class Rook extends Piece {
     getAvailableMoves(board) {
         let availableMoves = [];
         let location = board.findPiece(this);
-        let endPoint = 7;
+        
         let startPoint = location.row;
-        console.log("endPoint = " + endPoint + " startPoint = " + startPoint);
+        
+        // console.log("endPoint = " + endPoint + " startPoint = " + startPoint);
         //console.log("Player = " + player);
         if (this.player === Player.WHITE) {
             //HORIZONTAL
             //check if any other piece on our column
             let colStartPoint = location.col;
             
-            for (let i=0; i<=endPoint-1; i++) {
+            for (let i=1; i < 8 ; i++) {
                 console.log("i = " + i)
                 
                 if (board.getPiece(Square.at(location.row, i,)) !== null) {
                     
-                    if(i !== location.col -1) {
+                    
                         
                         availableMoves.push(Square.at(location.row, colStartPoint++));
-                     }                
+                                   
                     //add all squares from current square to end or other piece
                     
                 } else {
@@ -38,13 +39,13 @@ export default class Rook extends Piece {
              //VERTICAL
             //check if any other piece on our column
             let rowStartPoint = location.row;
-            for (let i=0; i<=endPoint-1; i++) {
+            for (let i= 1; i < 8; i++) {
                 console.log("i = " + i)
                 
                 if (board.getPiece(Square.at(i, location.col)) !== null) {
-                    if(i !== location.row -1) {
+                   
                         availableMoves.push(Square.at(rowStartPoint++, location.col));
-                    }
+                    
                     //console.log("startPoint + i = " + startPoint + i);
                     //add all squares from current square to end or other piece
                     
