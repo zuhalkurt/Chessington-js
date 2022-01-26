@@ -11,54 +11,33 @@ export default class Rook extends Piece {
         let availableMoves = [];
         let location = board.findPiece(this);
         let endPoint = 7;
-        let startPoint = location.row;
-        console.log("endPoint = " + endPoint + " startPoint = " + startPoint);
-        //console.log("Player = " + player);
-        if (this.player === Player.WHITE) {
-            //HORIZONTAL
-            //check if any other piece on our column
-            let colStartPoint = location.col;
+        let colStartPoint = location.col;
+        let rowStartPoint = location.row;
+        console.log("location.row = " + rowStartPoint + " location.col = " + location.col);   
             
-            for (let i=0; i<=endPoint-1; i++) {
-                console.log("i = " + i)
-                
-                if (board.getPiece(Square.at(location.row, i,)) !== null) {
-                    
-                    if(i !== location.col -1) {
-                        
-                        availableMoves.push(Square.at(location.row, colStartPoint++));
-                     }                
-                    //add all squares from current square to end or other piece
-                    
-                } else {
-                    console.log("found another piece");
-                }
+       // if (this.player === Player.WHITE) {
+
+            //HORIZONTAL
+          
+            for (let i=0; i<=endPoint; i++) {
+            
+                if(i !== colStartPoint) {
+                    availableMoves.push(Square.at(rowStartPoint, i));
+                    }                
+               
             }
 
              //VERTICAL
-            //check if any other piece on our column
-            let rowStartPoint = location.row;
-            for (let i=0; i<=endPoint-1; i++) {
-                console.log("i = " + i)
-                
-                if (board.getPiece(Square.at(i, location.col)) !== null) {
-                    if(i !== location.row -1) {
-                        availableMoves.push(Square.at(rowStartPoint++, location.col));
-                    }
-                    //console.log("startPoint + i = " + startPoint + i);
-                    //add all squares from current square to end or other piece
-                    
-                }
+                                  
+            for (let j=0; j<=endPoint; j++) {
+                  
+                if(j !== rowStartPoint) {
+                    availableMoves.push(Square.at(j, colStartPoint));
+                }                   
+              
             }
             
-        } else {
-            /* availableMoves.push(Square.at(location.row - 1, location.col))
-            if(location.row === 6) {
-                availableMoves.push(Square.at(location.row - 2, location.col))
-            } */
-       
-        }
-        console.log(availableMoves);
+        //console.log(availableMoves);
         return availableMoves; 
     }
-    }
+   }
