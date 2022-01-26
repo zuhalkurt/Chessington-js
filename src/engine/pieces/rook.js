@@ -13,9 +13,16 @@ export default class Rook extends Piece {
         let endPoint = 7;
         let colStartPoint = location.col;
         let rowStartPoint = location.row;
+<<<<<<< HEAD
         console.log("location.row = " + rowStartPoint + " location.col = " + location.col);   
             
        // if (this.player === Player.WHITE) {
+=======
+        // console.log("location.row = " + rowStartPoint + " location.col = " + location.col);   
+      
+          
+               // if (this.player === Player.WHITE) {
+>>>>>>> ea0d153f635c365a0d04df0a345dfb397533775f
 
             //HORIZONTAL
           
@@ -40,4 +47,8 @@ export default class Rook extends Piece {
         //console.log(availableMoves);
         return availableMoves; 
     }
+<<<<<<< HEAD
    }
+=======
+   }
+>>>>>>> ea0d153f635c365a0d04df0a345dfb397533775f
