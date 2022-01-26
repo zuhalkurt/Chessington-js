@@ -29,7 +29,7 @@ export default class Queen extends Piece {
             j++
         }
         j = (rowStartPoint + colStartPoint) 
-        console.log(`console log J ${j}`)
+        //console.log(`console log J ${j}`)
         endPoint = j;
         for (let i=0; i<=endPoint; i++) {
                  
@@ -58,7 +58,7 @@ export default class Queen extends Piece {
           
         }
         
-    console.log(availableMoves);
+    //console.log(availableMoves);
     return availableMoves; 
 }
 }
