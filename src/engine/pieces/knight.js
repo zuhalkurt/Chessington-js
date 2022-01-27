@@ -1,6 +1,7 @@
 import Player from '../player';
 import Piece from './piece';
 import Square from '../square';
+import { all } from 'express/lib/application';
 
 export default class Knight extends Piece {
     constructor(player) {
@@ -11,33 +12,48 @@ export default class Knight extends Piece {
                
         let availableMoves = [];
         let location = board.findPiece(this)
+        
+        //There are 4 rows of squares
+        
+        //row #1 is 2 rows behind the start and the column value is 1 to the left
         let rowStartPoint = location.row-2;
         let colStartPoint = location.col-1;
 
-        //There are 4 rows of squares
-        for (let i=0; i<=3; i++) {
+        //There are 2 column values for each row value
+        availableMoves.push(Square.at(rowStartPoint, colStartPoint));
+        availableMoves.push(Square.at(rowStartPoint, colStartPoint+2));
 
-            //if (location.row !== 0) {
-            //There are 2 column values for each row value
-            for (let j=0; j<=1; j++) { 
+        //row #2 is 1 row behind the start and the column value is 2 to the left
+        rowStartPoint = location.row-1;
+        colStartPoint = location.col-2;
 
-                if ((i=== 0 || i===3) && j===1) {
-                    //on rows #1&4 the column increases by 2
-                    colStartPoint = colStartPoint +1;
-                } else if ((i=== 1 || i===2) && j===1) {
-                    //on rows #2&3 the column first needs to be decreased by 1
-                    colStartPoint = colStartPoint -1;
-                } else if ((i=== 1 || i===2) && j===1) {
-                    //on rows #2&3 the column increases by 4
-                    colStartPoint = colStartPoint +4;
-                }
-                availableMoves.push(Square.at(rowStartPoint + i, colStartPoint + j));
-               
-            
+        availableMoves.push(Square.at(rowStartPoint, colStartPoint));
+        availableMoves.push(Square.at(rowStartPoint, colStartPoint+4));
+
+        //row #3 is 1 row ahead of the start and the column value is still 2 to the left
+        rowStartPoint = location.row+1;
+        
+        availableMoves.push(Square.at(rowStartPoint, colStartPoint));
+        availableMoves.push(Square.at(rowStartPoint, colStartPoint+4));
+        
+        //row #4 is 2 rows ahead of the start and the column value is now 1 to the left
+        rowStartPoint = location.row+2;
+        colStartPoint = location.col-1;
+
+        availableMoves.push(Square.at(rowStartPoint, colStartPoint));
+        availableMoves.push(Square.at(rowStartPoint, colStartPoint+2));
+
+        //console.log(availableMoves);
+        let offBoardSquares = [];
+        for (let i=0; i<=availableMoves.length-1; i++) {
+            if (availableMoves[i].row < 0 || availableMoves[i].row > 7) {
+                offBoardSquares = availableMoves.splice(i,1);
+            }
+            if (availableMoves[i].col < 0 || availableMoves[i].col > 7) {
+                offBoardSquares = availableMoves.splice(i,1);
+            }
         }
-   }
-   console.log(availableMoves);
    // we need to remove any squares that fall outside the board (<0 or >7)
     return availableMoves; 
-}
+    }
 }
