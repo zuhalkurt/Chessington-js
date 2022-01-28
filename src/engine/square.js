@@ -16,3 +16,18 @@ export default class Square {
         return `Row ${this.row}, Col ${this.col}`;
     }
 }
+export class funcRemSquares {
+    removeOffBoardSquares(arrAllAvailMoves) {
+        let offBoardSquares = [];
+        for (let i=0; i<=arrAllAvailMoves.length-1; i++) {
+            if (arrAllAvailMoves[i].row < 0 || arrAllAvailMoves[i].row > 7) {
+                offBoardSquares = arrAllAvailMoves.splice(i,1);
+            }
+            if (arrAllAvailMoves[i].col < 0 || arrAllAvailMoves[i].col > 7) {
+                offBoardSquares = arrAllAvailMoves.splice(i,1);
+            }
+        }
+        return arrAllAvailMoves
+    }
+}
+  

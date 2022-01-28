@@ -1,6 +1,7 @@
 import Player from '../player';
 import Square from '../square';
 import Piece from './piece';
+import { all } from 'express/lib/application';
 
 export default class Rook extends Piece {
     constructor(player) {
@@ -15,29 +16,25 @@ export default class Rook extends Piece {
         let rowStartPoint = location.row;
         // console.log("location.row = " + rowStartPoint + " location.col = " + location.col);   
       
+        //HORIZONTAL
           
-               // if (this.player === Player.WHITE) {
-
-            //HORIZONTAL
-          
-            for (let i=0; i<=endPoint; i++) {
+        for (let i=0; i<=endPoint; i++) {
+        
+            if(i !== colStartPoint) {
+                availableMoves.push(Square.at(rowStartPoint, i));
+                }                
             
-                if(i !== colStartPoint) {
-                    availableMoves.push(Square.at(rowStartPoint, i));
-                    }                
-               
-            }
+        }
 
-             //VERTICAL
-                                  
-            for (let j=0; j<=endPoint; j++) {
-                  
-                if(j !== rowStartPoint) {
-                    availableMoves.push(Square.at(j, colStartPoint));
-                }                   
-              
-            }
+            //VERTICAL
+                                
+        for (let j=0; j<=endPoint; j++) {
+                
+            if(j !== rowStartPoint) {
+                availableMoves.push(Square.at(j, colStartPoint));
+            }                   
             
+        }
         //console.log(availableMoves);
         return availableMoves; 
     }

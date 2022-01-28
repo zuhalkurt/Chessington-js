@@ -1,6 +1,6 @@
 import Player from '../player';
 import Piece from './piece';
-import Square from '../square';
+import Square, {funcRemSquares} from '../square';
 
 export default class King extends Piece {
     constructor(player) {
@@ -15,22 +15,20 @@ export default class King extends Piece {
         let colStartPoint = location.col-1;
 
         for (let i=0; i<=2; i++) {
-            if (location.row !== 0) {
-                for (let j=0; j<=2; j++) { 
-                    if (location.row !==0) {
-                    
-                    if (i===1 && j===1) {
-                        //skip this square as this is the start point
+            for (let j=0; j<=2; j++) { 
 
-                    } else {
-                
-                        availableMoves.push(Square.at(rowStartPoint + i, colStartPoint + j));
-                    }
-                }  
-            //console.log("Row #1" + availableMoves);
+                if (i===1 && j===1) {
+                    //skip this square as this is the start point
+
+                } else {
+            
+                    availableMoves.push(Square.at(rowStartPoint + i, colStartPoint + j));
+                }
+               
+            }
         }
-    }
-}
+    const callFunc = new funcRemSquares();
+    callFunc.removeOffBoardSquares(availableMoves);  
     return availableMoves; 
 }
 }

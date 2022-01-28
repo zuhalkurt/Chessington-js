@@ -1,6 +1,6 @@
 import Player from '../player';
 import Piece from './piece';
-import Square from '../square';
+import Square, { funcRemSquares } from '../square';
 import { all } from 'express/lib/application';
 
 export default class Knight extends Piece {
@@ -44,16 +44,10 @@ export default class Knight extends Piece {
         availableMoves.push(Square.at(rowStartPoint, colStartPoint+2));
 
         //console.log(availableMoves);
-        let offBoardSquares = [];
-        for (let i=0; i<=availableMoves.length-1; i++) {
-            if (availableMoves[i].row < 0 || availableMoves[i].row > 7) {
-                offBoardSquares = availableMoves.splice(i,1);
-            }
-            if (availableMoves[i].col < 0 || availableMoves[i].col > 7) {
-                offBoardSquares = availableMoves.splice(i,1);
-            }
-        }
-   // we need to remove any squares that fall outside the board (<0 or >7)
+        // we need to remove any squares that fall outside the board (<0 or >7)
+        const callFunc = new funcRemSquares();
+        callFunc.removeOffBoardSquares(availableMoves);   
+        
     return availableMoves; 
     }
 }
