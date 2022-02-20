@@ -10,35 +10,21 @@ export default class Rook extends Piece {
     getAvailableMoves(board) {
         let availableMoves = [];
         let location = board.findPiece(this);
-        let endPoint = 7;
-        let colStartPoint = location.col;
-        let rowStartPoint = location.row;
-        // console.log("location.row = " + rowStartPoint + " location.col = " + location.col);   
-      
-          
-               // if (this.player === Player.WHITE) {
 
-            //HORIZONTAL
-          
-            for (let i=0; i<=endPoint; i++) {
-            
-                if(i !== colStartPoint) {
-                    availableMoves.push(Square.at(rowStartPoint, i));
-                    }                
-               
+        for(let i = 1; i <=7; i++) {
+            if(location.row + i <= 7 && location.row + i >= 0){
+                availableMoves.push(Square.at(location.row + i, location.col))
             }
-
-             //VERTICAL
-                                  
-            for (let j=0; j<=endPoint; j++) {
-                  
-                if(j !== rowStartPoint) {
-                    availableMoves.push(Square.at(j, colStartPoint));
-                }                   
-              
+            if(location.row - i <= 7 && location.row - i >= 0) {
+                availableMoves.push(Square.at(location.row - i, location.col))
             }
-            
-        //console.log(availableMoves);
-        return availableMoves; 
+            if(location.col + i <= 7 && location.col + i >= 0) {
+                availableMoves.push(Square.at(location.row, location.col + i))
+            }
+            if(location.col - i <= 7 && location.col - i >= 0) {
+                availableMoves.push(Square.at(location.row, location.col - i))
+            }
+        }
+        return availableMoves;
     }
-   }
+    }

@@ -11,55 +11,42 @@ export default class Queen extends Piece {
        
         let availableMoves = [];
         let location = board.findPiece(this)
-        let colStartPoint = location.col;
-        let rowStartPoint = location.row;
-        let endPoint = 7 ;
 
-
-        let j = colStartPoint - rowStartPoint;
-        endPoint = 7 - j;
-        for(let i = 0; i <= endPoint; i++){
-            
-        //    moves to up right
-            
-        if(j !== colStartPoint && i !== rowStartPoint) {
-           
-            availableMoves.push(Square.at( i, j));
-            }  
-            j++
+        for(let i = 1; i <= 7; i++) {
+            if(location.row + i >= 0 && location.row + i <= 7) {
+                if(location.col + i >= 0 && location.col + i <= 7){
+                    availableMoves.push(Square.at(location.row + i, location.col + i))
+                }
+            }
+            if(location.row + i >= 0 && location.row + i <= 7){
+                if(location.col - i >= 0 && location.col -i <= 7){
+                    availableMoves.push(Square.at(location.row + i, location.col - i))
+                }
+            }
+            if(location.row - i >= 0 && location.row - i <= 7) {
+                if(location.col + i >= 0 && location.col + i <= 7){
+                    availableMoves.push(Square.at(location.row - i, location.col + i))
+                }
+            }
+            if(location.row - i >= 0 && location.row - i <= 7 ){
+                if(location.col - i >= 0 && location.col - i <= 7){
+                    availableMoves.push(Square.at(location.row - i, location.col - i))
+                }
+            }
+            if(location.col + i >= 0 && location.col + i <= 7) {
+                availableMoves.push(Square.at(location.row, location.col + i));
+            }
+            if(location.row + i >=0 && location.row + i <= 7) {
+                availableMoves.push(Square.at(location.row + i, location.col));
+            }
+            if(location.row - i >=0 && location.row - i <= 7) {
+                availableMoves.push(Square.at(location.row - i, location.col));
+            }
+            if(location.col -i >= 0 && location.col -i <= 7){
+                availableMoves.push(Square.at(location.row, location.col - i));
+            }         
         }
-        j = (rowStartPoint + colStartPoint) 
-        console.log(`console log J ${j}`)
-        endPoint = j;
-        for (let i=0; i<=endPoint; i++) {
-                 
-            if(i !== rowStartPoint && j !== colStartPoint) {
-               
-                availableMoves.push(Square.at( i ,  j)); 
-            }                   
-            j--
-        } 
-        endPoint = 7
-        for (let i=0; i<=endPoint; i++) {
-            
-            if(i !== colStartPoint) {
-                availableMoves.push(Square.at(rowStartPoint, i));
-                }                
-           
-        }
-
-         //VERTICAL
-                              
-        for (let i=0; i<=endPoint; i++) {
-              
-            if(i !== rowStartPoint) {
-                availableMoves.push(Square.at(i, colStartPoint));
-            }                   
-          
-        }
-        
-    console.log(availableMoves);
-    return availableMoves; 
+    return availableMoves;
 }
 }
        
